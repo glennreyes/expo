@@ -64,9 +64,7 @@ UM_EXPORT_METHOD_AS(checkForUpdateAsync,
     return;
   }
 
-  NSURLSessionConfiguration *configuration = NSURLSessionConfiguration.defaultSessionConfiguration;
-  configuration.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
-  EXUpdatesFileDownloader *fileDownloader = [[EXUpdatesFileDownloader alloc] initWithURLSessionConfiguration:configuration];
+  EXUpdatesFileDownloader *fileDownloader = [[EXUpdatesFileDownloader alloc] init];
   [fileDownloader downloadManifestFromURL:[EXUpdatesConfig sharedInstance].remoteUrl successBlock:^(EXUpdatesUpdate * _Nonnull update) {
     EXUpdatesUpdate *launchedUpdate = [EXUpdatesAppController sharedInstance].launchedUpdate;
     id<EXUpdatesSelectionPolicy> selectionPolicy = [EXUpdatesAppController sharedInstance].selectionPolicy;
