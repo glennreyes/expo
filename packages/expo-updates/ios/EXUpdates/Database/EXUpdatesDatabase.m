@@ -317,8 +317,7 @@ static NSString * const kEXUpdatesDatabaseFilename = @"updates.db";
 
 - (void)deleteUnusedUpdatesWithError:(NSError ** _Nullable)error
 {
-  NSString * const sql = @"DELETE FROM updates_assets WHERE update_id IN (SELECT id FROM updates WHERE keep = 0);\
-  DELETE FROM updates WHERE keep = 0;";
+  NSString * const sql = @"DELETE FROM updates WHERE keep = 0;";
   [self _executeSql:sql withArgs:nil error:error];
 }
 
