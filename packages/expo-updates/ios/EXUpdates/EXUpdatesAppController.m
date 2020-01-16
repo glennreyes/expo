@@ -321,7 +321,6 @@ static NSString * const kEXUpdatesAppControllerErrorDomain = @"EXUpdatesAppContr
 - (BOOL)appLoader:(EXUpdatesAppLoader *)appLoader shouldStartLoadingUpdate:(EXUpdatesUpdate *)update
 {
   BOOL shouldStartLoadingUpdate = [_selectionPolicy shouldLoadNewUpdate:update withLaunchedUpdate:_launcher.launchedUpdate];
-  NSLog(@"manifest downloaded, shouldStartLoadingUpdate is %@", shouldStartLoadingUpdate ? @"YES" : @"NO");
   return shouldStartLoadingUpdate;
 }
 
@@ -357,7 +356,6 @@ static NSString * const kEXUpdatesAppControllerErrorDomain = @"EXUpdatesAppContr
         [self _runReaperInBackground];
       }
     } else {
-      NSLog(@"No update available");
       // there's no update, so signal we're ready to launch
       [self _maybeFinish];
       [self _runReaperInBackground];
@@ -372,7 +370,6 @@ static NSString * const kEXUpdatesAppControllerErrorDomain = @"EXUpdatesAppContr
       [self->_timer invalidate];
     }
     self->_isTimerFinished = YES;
-    NSLog(@"update failed to load: %@", error.localizedDescription);
     [self _maybeFinish];
     [self _sendEventToBridgeWithType:kEXUpdatesErrorEventName body:@{@"message": error.localizedDescription}];
   });
